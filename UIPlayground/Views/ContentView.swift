@@ -46,6 +46,20 @@ struct ContentView: View {
                 switch category {
                 case .textInput:
                     TextInputDetailView(type: category)
+                case .interactiveControls:
+                    InteractiveControlsDetailView(type: category)
+                case .mediaGraphics:
+                    MediaGraphicsDetailView(type: category)
+                case .modifiersStyling:
+                    ModifiersDetailView(type: category)
+                case .navigation:
+                    NavigationDetailView(type: category)
+                case .layoutContainers:
+                    LayoutContainersDetailView(type: category)
+                case .stateManagement:
+                    StateManagementDetailView(type: category)
+                case .alertsSheets:
+                    AlertSheetDetailView(type: category)
                 default:
                     Text("Text input")
                 }

@@ -1,5 +1,5 @@
 //
-//  TextInputDetailView.swift
+//  InteractiveControlsDetailView.swift
 //  UIPlayground
 //
 //  Created by Kush Agrawal on 6/7/25.
@@ -11,10 +11,17 @@ import SwiftUI
 
 struct InteractiveControlsDetailView: View {
     let type: CategoryType
+    
+    @State private var isOn: Bool = false
+    @State private var sliderVal: Float = 0
 
-    @State var isOn: Bool = false
-    @State var sliderVal: Float = 0
-        
+    enum PickerColor: Hashable,CaseIterable {
+        case red
+        case yellow
+        case blue
+    }
+    @State private var selection: PickerColor = .red
+
     var body: some View {
         ScrollView {
             LazyVStack(spacing: 50) {
@@ -25,7 +32,7 @@ struct InteractiveControlsDetailView: View {
                 slider
                 SectionDivider()
                 picker
-                	}
+            }
         }
         .padding()
         .navigationTitle(type.rawValue)
@@ -33,33 +40,59 @@ struct InteractiveControlsDetailView: View {
     
     private var button: some View {
         Section {
-            Button("Plain") {
-                
-            }
-            .buttonStyle(.plain)
+            Button("bordered", action: {}).buttonStyle(.bordered)
 
-            Button("Borderless") {
+            Button("borderless", action: {}).buttonStyle(.borderless)
+
+            Button("borderedProminent", action: {}).buttonStyle(.borderedProminent)
+
+            Button("Pill Button") { }
+                .buttonStyle(.borderedProminent)
+                .buttonBorderShape(.capsule)
+
+            Button {
                 
+            } label: {
+                Image(systemName: "heart.fill")
             }
             .buttonStyle(.borderless)
-
-            Button("Automatic") {
-                
+            .imageScale(.large)
+            
+            Button("plain", action: {}).buttonStyle(.plain)
+            
+            Button {
+            } label: {
+                Label("System Image Button", systemImage: "arrow.down.circle")
             }
-            .buttonStyle(.automatic)
 
-            Button("Bordered") {
-                
+            ScrollView([.horizontal]) {
+                HStack {
+                    ForEach(ControlSize.allCases, id: \.self) { size in
+                        Button("Size: \(size)", action: {})
+                            .buttonStyle(.borderedProminent)
+                            .controlSize(size)
+                    }
+                }
             }
-            .buttonStyle(.bordered)
 
-            Button("Bordered Prominent") {
-                
-            }
-            .buttonStyle(.borderedProminent)
+            Button("Tint", action: {})
+                .buttonStyle(.borderedProminent)
+                .tint(Color.green)
+
+            Button("Custom", action: {})
+                .padding()
+                .foregroundStyle(.white)
+                .background(.green.gradient)
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+                .shadow(radius: 4)
+
+            Button("destructive", role: .destructive, action: {})
+
+            Button("cancel", role: .cancel, action: {})
+
+            
         } header: {
-            Text("Button")
-                .fontWeight(.bold)
+            SectionHeader(title: "Button")
         }
     }
     
@@ -72,8 +105,7 @@ struct InteractiveControlsDetailView: View {
                 .toggleStyle(.button)
 
         } header: {
-            Text("Toggle")
-                .fontWeight(.bold)
+            SectionHeader(title: "Toggle")
         }
     }
     
@@ -85,17 +117,21 @@ struct InteractiveControlsDetailView: View {
                 print(changed)
             }
         } header: {
-            Text("Slider: \(sliderVal)")
-                .fontWeight(.bold)
+            SectionHeader(title: "Slider")
+            Text("\(sliderVal)")
         }
     }
     
     private var picker: some View {
         Section {
-            
+            Picker("Flavor", selection: $selection) {
+                Text("Red").tag(PickerColor.red)
+                Text("Yellow").tag(PickerColor.yellow)
+                Button("Blue", action: {}).tag(PickerColor.blue)
+                    .buttonStyle(.borderedProminent)
+            }
         } header: {
-            Text("Picker")
-                .fontWeight(.bold)
+            SectionHeader(title: "Picker")
         }
     }
 }
@@ -103,4 +139,3 @@ struct InteractiveControlsDetailView: View {
 #Preview {
     InteractiveControlsDetailView(type: .textInput)
 }
-
