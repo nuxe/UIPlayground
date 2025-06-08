@@ -8,17 +8,17 @@
 import Foundation
 
 enum CategoryType: String, CaseIterable, Hashable {
-    case textInput = "Text & Input"
-    case interactiveControls = "Interactive Controls"
-    case modifiersStyling = "Modifiers & Styling"
-    case layoutContainers = "Layout Containers"
-    case navigation = "Navigation"
+    case textInput = "Text & Input ✅"
+    case interactiveControls = "Interactive Controls ✅"
+    case mediaGraphics = "Media & Graphics ✅"
+    case modifiersStyling = "Modifiers & Styling ✅"
+    case layoutContainers = "Layout Containers ✅"
+    case navigation = "Navigation ✅"
+    case stateManagement = "State Management ✅"
+    case alertsSheets = "Alerts & Sheets ✅"
     case dataDisplay = "Data Display"
-    case mediaGraphics = "Media & Graphics"
     case shapesDrawing = "Shapes & Drawing"
     case animations = "Animations"
-    case stateManagement = "State Management"
-    case alertsSheets = "Alerts & Sheets"
     case gestures = "Gestures"
 }
 
@@ -44,19 +44,14 @@ struct UICategory: Identifiable {
             components: ["Button", "Toggle", "Slider", "Stepper", "Picker", "DatePicker", "ColorPicker"]
         ),
         UICategory(
+            type: .mediaGraphics,
+            icon: "photo",
+            components: ["Image", "AsyncImage", "VideoPlayer", "Map"]
+        ),
+        UICategory(
             type: .modifiersStyling,
             icon: "paintbrush",
             components: ["Background", "Foreground", "Frame", "Padding", "Border", "Shadow", "Blur", "Rotation"]
-        ),
-        UICategory(
-            type: .stateManagement,
-            icon: "arrow.clockwise",
-            components: ["@State", "@Binding", "@ObservedObject", "@StateObject", "@EnvironmentObject", "@Environment"]
-        ),
-        UICategory(
-            type: .alertsSheets,
-            icon: "exclamationmark.triangle",
-            components: ["Alert", "ActionSheet", "Sheet", "FullScreenCover", "Popover", "ConfirmationDialog"]
         ),
         UICategory(
             type: .layoutContainers,
@@ -69,14 +64,19 @@ struct UICategory: Identifiable {
             components: ["NavigationStack", "NavigationLink", "TabView", "NavigationSplitView"]
         ),
         UICategory(
+            type: .stateManagement,
+            icon: "arrow.clockwise",
+            components: ["@State", "@Binding", "@ObservedObject", "@StateObject", "@EnvironmentObject", "@Environment"]
+        ),
+        UICategory(
+            type: .alertsSheets,
+            icon: "exclamationmark.triangle",
+            components: ["Alert", "ActionSheet", "Sheet", "FullScreenCover", "Popover", "ConfirmationDialog"]
+        ),
+        UICategory(
             type: .dataDisplay,
             icon: "list.bullet",
             components: ["List", "ForEach", "ScrollView", "Table", "DisclosureGroup"]
-        ),
-        UICategory(
-            type: .mediaGraphics,
-            icon: "photo",
-            components: ["Image", "AsyncImage", "VideoPlayer", "Map"]
         ),
         UICategory(
             type: .shapesDrawing,
